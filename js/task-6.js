@@ -13,14 +13,15 @@ createBtn.classList.add('create');
 destroyBtn.classList.add('destroy');
 const createBoxes = amount => {
   boxes.innerHTML = '';
-  for (let i = 0; i < amount; i++) {
-    const newBox = document.createElement('div');
-    newBox.classList.add('new-box');
-    newBox.style.width = `${30 + i * 10}px`;
-    newBox.style.height = `${30 + i * 10}px`;
-    newBox.style.backgroundColor = getRandomHexColor();
-    boxes.appendChild(newBox);
-  }
+  const newBoxes = Array(amount)
+    .fill('')
+    .map((_, i) => {
+      const size = 30 + i * 10;
+      const color = getRandomHexColor();
+      return `<div class="new-box" style="width: ${size}px; height: ${size}px; background-color: ${color};"></div>`;
+    })
+    .join('');
+  boxes.innerHTML = newBoxes;
 };
 createBtn.addEventListener('click', () => {
   const amount = Number(input.value);
